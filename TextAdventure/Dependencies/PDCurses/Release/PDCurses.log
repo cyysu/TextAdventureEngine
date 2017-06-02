@@ -1,0 +1,55 @@
+﻿  addch.c
+  addchstr.c
+  addstr.c
+  attr.c
+  beep.c
+  bkgd.c
+  border.c
+  clear.c
+  color.c
+  debug.c
+  delch.c
+  deleteln.c
+  deprec.c
+  getch.c
+  getstr.c
+  getyx.c
+  inch.c
+  inchstr.c
+  initscr.c
+  inopts.c
+  Compiling...
+  insch.c
+  insstr.c
+  instr.c
+pdcurses\instr.c(93): warning C4244: '=': conversion from 'chtype' to 'char', possible loss of data
+  kernel.c
+  keyname.c
+  mouse.c
+  move.c
+  outopts.c
+  overlay.c
+  pad.c
+  panel.c
+  printw.c
+  refresh.c
+  scanw.c
+  scroll.c
+  scr_dump.c
+  slk.c
+  termattr.c
+  terminfo.c
+  touch.c
+  Compiling...
+  util.c
+  window.c
+  pdcclip.c
+  pdcdisp.c
+win32\pdcdisp.c(79): warning C4244: '=': conversion from 'chtype' to 'WCHAR', possible loss of data
+  pdcgetsc.c
+  pdckbd.c
+  pdcscrn.c
+  pdcsetsc.c
+  pdcutil.c
+LINK : warning LNK4068: /MACHINE not specified; defaulting to X86
+  PDCurses.vcxproj -> C:\Users\Joe\Desktop\TextAdventure\TextAdventure\Release\PDCurses.lib
