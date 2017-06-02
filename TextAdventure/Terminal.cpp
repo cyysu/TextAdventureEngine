@@ -12,6 +12,8 @@ using namespace TextAdventure;
 std::ostream* Terminal::s_StandardStream = &std::cout; //TODO: Consider paramaterizing these?
 std::ostream* Terminal::s_ErrorStream    = &std::cerr;
 
+std::map<std::string, std::shared_ptr<Terminal::Window>> Terminal::s_Windows;
+
 int Terminal::Color::BLACK        = rlutil::BLACK;
 int Terminal::Color::BLUE         = rlutil::BLUE;
 int Terminal::Color::GREEN        = rlutil::GREEN;
@@ -29,30 +31,13 @@ int Terminal::Color::LIGHTMAGENTA = rlutil::LIGHTMAGENTA;
 int Terminal::Color::YELLOW       = rlutil::YELLOW;
 int Terminal::Color::WHITE        = rlutil::WHITE;
 
-//tseting stuff
-WINDOW* createWindow(const int &aWidth, const int &aHeight, const int &aX, const int &aY)
+void Terminal::setTitle(const std::string &aName)
 {
-	//OutputDebugString(std::to_string(x).append(", ").append(std::to_string(y)).c_str());
-	WINDOW* newWindow = newwin(aHeight, aWidth, aX, aY);
-
-	if (newWindow == NULL)
-	{
-		endwin();
-		throw (std::exception("Terminal could not create a new window"));
-
-	}
-
-	return newWindow;
+#ifdef __PDCURSES__
+	PDC_set_title(aName.c_str());
+#endif
 
 }
-
-void deleteWindow(WINDOW*& aWindow)
-{
-	delwin(aWindow);
-
-}
-
-///
 
 void Terminal::resize(const int &aWidth, const int &aHeight)
 {
@@ -63,40 +48,36 @@ void Terminal::resize(const int &aWidth, const int &aHeight)
 
 }
 
-
-
 void Terminal::init()
 {
 	initscr();
 	start_color();
+	raw();
+
+	setTitle("TextAdventure");
 	resize(100, 50);
 
-	/*WINDOW* win = 0;//createWindow(LINES, COLS, 0, 0);
-	{
-		win = newwin(30, 30, 5, 65);
+	std::shared_ptr<Window> defaultWindow = std::shared_ptr<Window> (new Window(30, 30, 5, 20));
+	s_Windows.insert(std::pair<std::string, std::shared_ptr<Window>>("SuperTestWindow", defaultWindow));
 
-		if (win == NULL)
-		{
-			endwin();
+	defaultWindow._Get()->write("Write a string: ",0,0);
+	std::string userInput = defaultWindow._Get()->read();
 
-		}
+	defaultWindow._Get()->write(userInput+"\n");
 
-	}*/
+	defaultWindow._Get()->write("A");
+	defaultWindow._Get()->write("B");
+	defaultWindow._Get()->write("C");
 
-	WINDOW* win = createWindow(30, 30, 5, 20);
+	//defaultWindow._Get()->write("\nPress any key to continue");
+	//wgetch(defaultWindow._Get()->getHandle());
 
-	{
-		mvwaddstr(win, 0, 0, "Press any key to continue");
-		wrefresh(win);
-		raw();
-		wgetch(win);
-		wrefresh(win);
-	}
+	//defaultWindow._Get()->draw();
 
+	wgetch(defaultWindow._Get()->getHandle());
 	resize(50, 20);
+	wgetch(defaultWindow._Get()->getHandle());
 
-	wgetch(win);
-	
 }
 
 
@@ -156,5 +137,66 @@ void Terminal::write(const std::string &aText, const int &aX, const int &aY)
 void Terminal::write(const std::string &aText)
 {
 	*s_StandardStream << aText;
+
+}
+
+////////////////////////////////////////
+// WINDOW
+/////////////////////////////////////////
+Terminal::Window::Window(const int& aWidth, const int& aHeight, const int& aX, const int& aY) : 
+	m_Handle(newwin(aHeight, aWidth, aX, aY))
+{
+	if (m_Handle == NULL)
+	{
+		endwin();
+		throw (std::exception("Terminal could not create a new window"));
+
+	}
+
+}
+
+Terminal::Window::~Window()
+{
+	_win* ptr = m_Handle;
+	delwin(ptr);
+
+}
+
+/*void Terminal::Window::write(const char &aChar)
+{
+	//waddstr(m_Handle, &aChar);
+	//wrefresh(m_Handle);
+	
+}*/
+
+void Terminal::Window::write(const std::string &aString)
+{
+	waddstr(m_Handle, aString.c_str());
+	wrefresh(m_Handle);
+
+}
+
+void Terminal::Window::write(const std::string &aString, const int &aX, const int &aY)
+{
+	mvwaddstr(m_Handle, aY, aX, aString.c_str());
+	wrefresh(m_Handle);
+
+}
+
+void Terminal::Window::draw()
+{
+	wrefresh(m_Handle);
+
+}
+
+std::string Terminal::Window::read(const int& aInputBufferLength)
+{
+	char* buffer = new char[aInputBufferLength+1];//+1 for the null terminator
+	wgetnstr(m_Handle, buffer, aInputBufferLength);
+	
+	std::string rValue(buffer);
+	delete[] buffer;
+
+	return rValue;
 
 }

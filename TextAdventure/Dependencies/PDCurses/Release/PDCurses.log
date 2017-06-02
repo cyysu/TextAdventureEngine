@@ -52,4 +52,4 @@ win32\pdcdisp.c(79): warning C4244: '=': conversion from 'chtype' to 'WCHAR', po
   pdcsetsc.c
   pdcutil.c
 LINK : warning LNK4068: /MACHINE not specified; defaulting to X86
-  PDCurses.vcxproj -> C:\Users\Joe\Desktop\TextAdventure\TextAdventure\Release\PDCurses.lib
+  PDCurses.vcxproj -> C:\Users\Joe\Desktop\TextAdventureEngine\TextAdventure\Release\PDCurses.lib
