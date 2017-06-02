@@ -172,18 +172,18 @@ Terminal::Window::~Window()
 void Terminal::Window::write(const std::string &aString)
 {
 	waddstr(m_Handle, aString.c_str());
-	wrefresh(m_Handle);
+	//wrefresh(m_Handle);
 
 }
 
 void Terminal::Window::write(const std::string &aString, const int &aX, const int &aY)
 {
 	mvwaddstr(m_Handle, aY, aX, aString.c_str());
-	wrefresh(m_Handle);
+	//wrefresh(m_Handle);
 
 }
 
-void Terminal::Window::draw()
+void Terminal::Window::refresh()
 {
 	wrefresh(m_Handle);
 

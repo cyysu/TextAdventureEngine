@@ -41,7 +41,7 @@ namespace TextAdventure
 			void write(const std::string &aString);
 			void write(const std::string &aString, const int &aX, const int &aY);
 			std::string read(const int& aInputBufferLength = 128);
-			void draw();
+			void refresh();
 			
 		};
 

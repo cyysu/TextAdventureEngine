@@ -1,1 +1,6 @@
-﻿  TextAdventure.vcxproj -> C:\Users\Joe\Desktop\TextAdventureEngine\TextAdventure\Release\TextAdventure.lib
+﻿  Terminal.cpp
+c:\users\joe\desktop\textadventureengine\textadventure\Dependencies\PDCurses\curses.h(218): warning C4005: 'MOUSE_MOVED': macro redefinition
+  C:\Program Files (x86)\Windows Kits\8.1\Include\um\wincon.h(118): note: see previous definition of 'MOUSE_MOVED'
+c:\users\joe\desktop\textadventureengine\textadventure\Dependencies\PDCurses\curses.h(1788): warning C4005: 'getch': macro redefinition
+  c:\users\joe\desktop\textadventureengine\textadventure\./Dependencies/rlutil/rlutil.h(60): note: see previous definition of 'getch'
+  TextAdventure.vcxproj -> C:\Users\Joe\Desktop\TextAdventureEngine\TextAdventure\Release\TextAdventure.lib

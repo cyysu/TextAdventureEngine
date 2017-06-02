@@ -1,8 +1,5 @@
-﻿  Game.cpp
-  Generating code
-  71 of 597 functions (11.9%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    7 functions had inline decision re-evaluated but remain unchanged
+﻿  Generating code
+  All 598 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   TestGame.vcxproj -> C:\Users\Joe\Desktop\TextAdventureEngine\TestGame\Release\TestGame.exe
   TestGame.vcxproj -> C:\Users\Joe\Desktop\TextAdventureEngine\TestGame\Release\TestGame.pdb (Full PDB)
